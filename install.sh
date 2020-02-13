@@ -4,7 +4,7 @@ output(){
     echo -e '\e[36m'$1'\e[0m';
 }
 
-version=v1.4
+version=v1.5
 
 #Change your company name accordingly.
 company="ThienTran.io"
