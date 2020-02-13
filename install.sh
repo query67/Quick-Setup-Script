@@ -253,7 +253,7 @@ secure_ssh(){
     chown -R $USER:$USER ~/.ssh
 
     output "Disabling SSH password based login..."
-    sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+    sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
     output "Restarting SSH service..."
     systemctl restart sshd
     output "Finished SSH configuration."
