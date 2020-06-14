@@ -300,9 +300,7 @@ activate_iptables
 activate_fail2ban
 whitelist_cloudflare
 activate_tuned
-if [ $lsb_dist == "fedora" ] || [ $lsb_dist == "centos" ] || [ $lsb_dist == "rhel" ] || [ $lsb_dist == "cloudlinux" ]; then
-    javapipe_kernel
-fi
+javapipe_kernel
 spectre_vulnerbility_check
 secure_ssh
 motd
