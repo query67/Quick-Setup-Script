@@ -239,6 +239,21 @@ EOF
     esac    
 }
 
+spectre_vulnerbility_check(){
+     output "Run the spectre and meltdown vulnerbility check script? (https://github.com/speed47/spectre-meltdown-checker)"
+     output "[1] Yes."
+     output "[2] No."
+     read spectre
+     case $spectre in
+        1)  bash -c 'cat > /etc/sysctl.conf' <<-'EOF'
+     	    curl -sSL https://meltdown.ovh -o spectre-meltdown-checker.sh | bash
+	    ;;
+	2)  output "Skipping..."
+            ;;
+        * ) output "You did not enter a valid selection."
+            spectre_vulnerbility_check
+    esac    	
+}
 
 secure_ssh(){
     output "Ensure that the file and directory exists."
@@ -288,6 +303,7 @@ activate_tuned
 if [ $lsb_dist == "fedora" ] || [ $lsb_dist == "centos" ] || [ $lsb_dist == "rhel" ] || [ $lsb_dist == "cloudlinux" ]; then
     javapipe_kernel
 fi
+spectre_vulnerbility_check
 secure_ssh
 motd
 output "Finished configuration."
