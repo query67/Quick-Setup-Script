@@ -136,17 +136,32 @@ EOF
 }
 
 whitelist_cloudflare(){
-    output "Do you want to whitelist only Cloudflare's IPs on port 80 and 443?"
+    output "Do you want to whitelist only Cloudflare (cloudflare.com)'s IPs on your selection of ports?"
     output "[1] Yes."
     output "[2] No."
     read cloudflare
     case $cloudflare in
-    1)  curl -sSL https://raw.githubusercontent.com/tommytran732/Cloudflare-IPWhitelist/master/cloudflare.sh | sudo bash
+    1)  bash <(curl -sSL https://raw.githubusercontent.com/tommytran732/Cloudflare-IPWhitelist/master/cloudflare.sh)
         ;;
     2) output "Skipping..."
         ;;
     * ) output "You did not enter a valid selection."
         whitelist_cloudflare
+    esac
+}
+
+whitelist_tcpshield(){
+    output "Do you want to whitelist only TCPShield's IPs on your selection of ports?"
+    output "[1] Yes."
+    output "[2] No."
+    read tcpshield
+    case $tcpshield in
+    1)  bash <(curl -sSL https://raw.githubusercontent.com/tommytran732/TCPShield-IPWhitelist/master/tcpshield.sh)
+        ;;
+    2) output "Skipping..."
+        ;;
+    * ) output "You did not enter a valid selection."
+        whitelist_tcpshield
     esac
 }
 
@@ -299,6 +314,7 @@ update_packages
 activate_iptables
 activate_fail2ban
 whitelist_cloudflare
+whitelist_tcpshield
 activate_tuned
 javapipe_kernel
 spectre_vulnerbility_check
