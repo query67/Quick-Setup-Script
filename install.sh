@@ -260,8 +260,7 @@ spectre_vulnerbility_check(){
      output "[2] No."
      read spectre
      case $spectre in
-        1)  bash -c 'cat > /etc/sysctl.conf' <<-'EOF'
-     	    curl -sSL https://meltdown.ovh -o spectre-meltdown-checker.sh | bash
+        1)  curl -sSL https://meltdown.ovh -o spectre-meltdown-checker.sh | bash
 	    ;;
 	2)  output "Skipping..."
             ;;
